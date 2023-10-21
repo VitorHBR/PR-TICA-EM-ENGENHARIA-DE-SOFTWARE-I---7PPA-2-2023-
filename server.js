@@ -5,6 +5,7 @@ const HomeRoute = require('./routes/homeRoute');
 const FuncionariosRoute = require('./routes/funcionariosRoute');
 const CargosRoute = require('./routes/cargosRoute');
 const DepartamentosRoute = require('./routes/departamentosRoute');
+const EscalasRoute = require ('./routes/escalasRoute')
 
 const app = express();
 
@@ -35,6 +36,9 @@ app.use('/cargos', cargosRota.router);
 
 let departamentosRota = new DepartamentosRoute();
 app.use('/departamentos', departamentosRota.router);
+
+let escalasRota = new EscalasRoute();
+app.use('/escalas', escalasRota.router);
 
 
 //ponto de inicio do nosso servidor web

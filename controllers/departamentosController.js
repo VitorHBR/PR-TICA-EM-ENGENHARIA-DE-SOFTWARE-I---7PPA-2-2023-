@@ -29,7 +29,6 @@ class DepartamentosController {
         let departamento = new DepartamentosModel();
 
         departamento.nomeDepartamento = req.body.nomeDepartamento;
-       
 
         let retorno = await departamento.cadastrarDepartamentos();
         let lista = await departamento.listarDepartamentos();
