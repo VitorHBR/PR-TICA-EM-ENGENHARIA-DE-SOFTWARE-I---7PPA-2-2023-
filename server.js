@@ -2,8 +2,8 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const HomeRoute = require('./routes/homeRoute');
-const ProdutoRoute = require('./routes/produtoRoute');
 const FuncionariosRoute = require('./routes/funcionariosRoute');
+const CargosRoute = require('./routes/cargosRoute');
 
 const app = express();
 
@@ -24,10 +24,13 @@ app.use(expressLayouts);
 //definindo as rotas que o nosso sistema vai reconhecer através da url do navegador
 let homeRota = new HomeRoute();
 app.use('/', homeRota.router)
-let produtoRota = new ProdutoRoute();
-app.use('/produto', produtoRota.router);
+
+
 let funcionariosRota = new FuncionariosRoute();
 app.use('/funcionarios', funcionariosRota.router);
+
+let cargosRota = new CargosRoute();
+app.use('/cargos', cargosRota.router);
 
 
 //ponto de inicio do nosso servidor web
