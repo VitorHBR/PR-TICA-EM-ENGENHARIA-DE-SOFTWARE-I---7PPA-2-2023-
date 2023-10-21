@@ -16,6 +16,10 @@ class CargosRoute {
 
         let ctrl = new CargosController
         this.#router.get('/', ctrl.listarView);
+        this.#router.get('/deletarcargos/:id', ctrl.deletarCargos);
+        this.#router.post('/cadastrarcargos', ctrl.cadastrarCargos);
+        this.#router.post('/buscarcargos', ctrl.buscarCargos);
+        this.#router.post('/alterarcargos', ctrl.alterarCargos);
     }
 }
 
