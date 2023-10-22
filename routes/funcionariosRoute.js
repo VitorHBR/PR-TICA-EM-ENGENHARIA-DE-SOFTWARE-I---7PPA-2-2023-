@@ -16,6 +16,8 @@ class FuncionariosRoute {
 
         let ctrl = new FuncionariosController
         this.#router.get('/', ctrl.listarView);
+        this.#router.post('/buscarfuncionarios', ctrl.buscarFuncionarios);
+        this.#router.get('/deletarfuncionarios/:id', ctrl.deletarFuncionarios);
     }
 }
 

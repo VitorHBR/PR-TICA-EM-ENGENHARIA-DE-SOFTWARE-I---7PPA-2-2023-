@@ -20,6 +20,7 @@ class DepartamentosRoute {
         this.#router.post('/cadastrardepartamentos', ctrl.cadastrarDepartamentos);
         this.#router.post('/buscardepartamentos', ctrl.buscarDepartamentos);
         this.#router.post('/alterardepartamentos', ctrl.alterarDepartamentos);
+        this.#router.get('/listarfetch', ctrl.listarJson);
     }
 }
 

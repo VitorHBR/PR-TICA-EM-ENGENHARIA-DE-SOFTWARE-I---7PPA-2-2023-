@@ -30,6 +30,7 @@ class CargosController {
         let cargo = new CargosModel();
 
         cargo.nomeCargo = req.body.nomeCargo;
+        cargo.departamento_idDepartamento= req.body.departamento_idDepartamento;
        
 
         let retorno = await cargo.cadastrarCargos();
@@ -52,6 +53,7 @@ class CargosController {
 
         cargo.idCargo = req.body.idCargo;
         cargo.nomeCargo= req.body.nomeCargo;
+        cargo.departamento_idDepartamento=req.body.departamentoalt;
        
 
         let retorno = await cargo.alterarCargos();

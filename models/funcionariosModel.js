@@ -54,6 +54,38 @@ class FuncionariosModel {
         return listaRetorno;
     }
 
+
+
+    async buscarFuncionarios() {
+
+        let sql = "SELECT * FROM `funcionario` WHERE `funcionarioNome` LIKE '%"+this.funcionarioNome+"%' ORDER BY `funcionario`.`funcionarioNome` ASC";
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        let listaRetorno = [];
+
+        if(rows.length > 0){
+            for(let i=0; i<rows.length; i++){
+                var row = rows[i];
+                listaRetorno.push(new FuncionariosModel(row['idFuncionario'], row['funcionarioCPF'], row['funcionarioNome'], row['funcionarioCargo'], row['funcionarioDepartamento'], row['funcionarioTelefone'], row['dataAdmissao'], row['funcionarioEmail'], row['funcionarioSenha']));
+                
+                
+            }
+        }
+
+        return listaRetorno;
+    }
+
+
+    async deletarFuncionarios(id) {
+
+        let sql = "DELETE FROM `funcionario` WHERE `funcionario`.`idFuncionario` = '"+id+"'";
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        return true;
+    }
+
 }
 
 module.exports = FuncionariosModel;

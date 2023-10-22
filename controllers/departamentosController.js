@@ -11,7 +11,12 @@ class DepartamentosController {
     async listarJson(req, res) {
         let departamento = new DepartamentosModel();
         let lista = await departamento.listarDepartamentos();
-        res.send(lista);
+        var retorno=[];
+        for (var index = 0; index < lista.length; index++) 
+        {  retorno.push([lista[index].idDepartamento,lista[index].nomeDepartamento]) ;
+       
+        }
+        res.send(retorno);
     }
 
 
