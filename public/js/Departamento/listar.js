@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function() {
-    alert('exibiu')
+    //alert('exibiu')
 })
 
 function carregarProduto() {

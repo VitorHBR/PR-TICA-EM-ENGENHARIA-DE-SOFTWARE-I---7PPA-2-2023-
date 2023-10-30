@@ -1,6 +1,6 @@
 const express = require('express');
 const DepartamentosController = require('../controllers/departamentosController');
-
+const Autenticacao = require('../middleware/autenticacao');
 class DepartamentosRoute {
 
     #router;
@@ -13,14 +13,14 @@ class DepartamentosRoute {
 
     constructor() {
         this.#router = express.Router();
-
-        let ctrl = new DepartamentosController
-        this.#router.get('/', ctrl.listarView);
-        this.#router.get('/deletardepartamentos/:id', ctrl.deletarDepartamentos);
-        this.#router.post('/cadastrardepartamentos', ctrl.cadastrarDepartamentos);
-        this.#router.post('/buscardepartamentos', ctrl.buscarDepartamentos);
-        this.#router.post('/alterardepartamentos', ctrl.alterarDepartamentos);
-        this.#router.get('/listarfetch', ctrl.listarJson);
+        let auth = new Autenticacao();
+        let ctrl = new DepartamentosController();
+        this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
+        this.#router.get('/deletardepartamentos/:id',auth.usuarioEstaLogado, ctrl.deletarDepartamentos);
+        this.#router.post('/cadastrardepartamentos',auth.usuarioEstaLogado, ctrl.cadastrarDepartamentos);
+        this.#router.post('/buscardepartamentos',auth.usuarioEstaLogado, ctrl.buscarDepartamentos);
+        this.#router.post('/alterardepartamentos',auth.usuarioEstaLogado, ctrl.alterarDepartamentos);
+        this.#router.get('/listarfetch',auth.usuarioEstaLogado, ctrl.listarJson);
     }
 }
 

@@ -5,7 +5,8 @@ const HomeRoute = require('./routes/homeRoute');
 const FuncionariosRoute = require('./routes/funcionariosRoute');
 const CargosRoute = require('./routes/cargosRoute');
 const DepartamentosRoute = require('./routes/departamentosRoute');
-const EscalasRoute = require ('./routes/escalasRoute')
+const EscalasRoute = require ('./routes/escalasRoute');
+const LoginRoute = require('./routes/loginRoute');
 
 const app = express();
 
@@ -39,6 +40,9 @@ app.use('/departamentos', departamentosRota.router);
 
 let escalasRota = new EscalasRoute();
 app.use('/escalas', escalasRota.router);
+
+let loginRota = new LoginRoute();
+app.use('/login', loginRota.router);
 
 
 //ponto de inicio do nosso servidor web

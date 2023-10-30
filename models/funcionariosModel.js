@@ -7,6 +7,7 @@ class FuncionariosModel {
     #funcionarioCPF;
     #funcionarioNome;
     #funcionarioCargo;
+    #funcionarioEscala;
     #funcionarioDepartamento;
     #funcionarioTelefone;
     #dataAdmissao;
@@ -17,17 +18,19 @@ class FuncionariosModel {
     get funcionarioCPF() { return this.#funcionarioCPF; } set funcionarioCPF(funcionarioCPF) {this.#funcionarioCPF = funcionarioCPF;}
     get funcionarioNome() { return this.#funcionarioNome; } set funcionarioNome(funcionarioNome) {this.#funcionarioNome = funcionarioNome;}
     get funcionarioCargo() { return this.#funcionarioCargo; } set funcionarioCargo(funcionarioCargo) {this.#funcionarioCargo = funcionarioCargo;}
+    get funcionarioEscala() { return this.#funcionarioEscala; } set funcionarioEscala(funcionarioEscala) {this.#funcionarioEscala = funcionarioEscala;}
     get funcionarioDepartamento() { return this.#funcionarioDepartamento; } set funcionarioDepartamento(funcionarioDepartamento) {this.#funcionarioDepartamento = funcionarioDepartamento;}
     get funcionarioTelefone() { return this.#funcionarioTelefone; } set funcionarioTelefone(funcionarioTelefone) {this.#funcionarioTelefone = funcionarioTelefone;}
     get dataAdmissao() { return this.#dataAdmissao; } set dataAdmissao(dataAdmissao) {this.#dataAdmissao = dataAdmissao;}
     get funcionarioEmail() { return this.#funcionarioEmail; } set funcionarioEmail(funcionarioEmail) {this.#funcionarioEmail = funcionarioEmail;}
     get funcionarioSenha() { return this.#funcionarioSenha; } set funcionarioSenha(funcionarioSenha) {this.#funcionarioSenha = funcionarioSenha;}
 
-    constructor(idFuncionario, funcionarioCPF, funcionarioNome, funcionarioCargo, funcionarioDepartamento, funcionarioTelefone, dataAdmissao, funcionarioEmail, funcionarioSenha) {
-        this.#idFuncionario = idFuncionario
-        this.#funcionarioCPF = funcionarioCPF
-        this.#funcionarioNome = funcionarioNome
-        this.#funcionarioCargo = funcionarioCargo
+    constructor(idFuncionario, funcionarioCPF, funcionarioNome, funcionarioCargo,funcionarioEscala, funcionarioDepartamento, funcionarioTelefone, dataAdmissao, funcionarioEmail, funcionarioSenha) {
+        this.#idFuncionario = idFuncionario;
+        this.#funcionarioCPF = funcionarioCPF;
+        this.#funcionarioNome = funcionarioNome;
+        this.#funcionarioCargo = funcionarioCargo;
+        this.#funcionarioEscala = funcionarioEscala;
         this.#funcionarioDepartamento = funcionarioDepartamento;
         this.#funcionarioTelefone = funcionarioTelefone;
         this.#dataAdmissao = dataAdmissao;
@@ -38,7 +41,7 @@ class FuncionariosModel {
 
     async listarFuncionarios() {
 
-        let sql = 'SELECT * FROM `funcionario`';
+        let sql = 'SELECT * FROM `funcionario` INNER JOIN cargo ON funcionario.cargo_idCargo=cargo_idCargo INNER JOIN departamento ON funcionario.departamento_idDepartamento=departamento.idDepartamento INNER JOIN escaladetrabalho ON funcionario.escalaDeTrabalho_idEscalaDeTrabalho = escaladetrabalho.idEscala';
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -47,7 +50,7 @@ class FuncionariosModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new FuncionariosModel(row['idFuncionario'], row['funcionarioCPF'], row['funcionarioNome'], row['funcionarioCargo'], row['funcionarioDepartamento'], row['funcionarioTelefone'], row['dataAdmissao'], row['funcionarioEmail'], row['funcionarioSenha']));
+                listaRetorno.push(new FuncionariosModel(row['idFuncionario'], row['funcionarioCPF'], row['funcionarioNome'], row['nomeCargo'], row['nomeDepartamento'],row['nomeEscala'] , row['funcionarioTelefone'], row['dataAdmissao'], row['funcionarioEmail'], row['funcionarioSenha']));
             }
         }
 
@@ -85,6 +88,18 @@ class FuncionariosModel {
 
         return true;
     }
+
+
+    async autenticarFuncionario (usuario, senha) {
+        const sql = "SELECT * FROM `funcionario` WHERE `funcionarioEmail` LIKE '"+usuario+"' AND `funcionarioSenha` LIKE '"+senha+"'";
+       
+        var row = await conexao.ExecutaComando(sql);
+        
+        if(row.length > 0)
+            return row;
+        else 
+            return null;
+    } 
 
 }
 

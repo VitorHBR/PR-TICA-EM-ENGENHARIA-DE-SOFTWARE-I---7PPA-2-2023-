@@ -1,7 +1,8 @@
 <!--Para fazer com fetch-->
-<script src="/js/Produto/listar.js"></script>
+<script src="/js/Departamento/listar.js"></script>
 
-<div>
+<body onload="listardepartamento()">
+  <div>
     <h1>Funcionários</h1>
     <div>
         <nav class="navbar bg-body-tertiary">
@@ -18,21 +19,53 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Novo Cargo</h1>
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Novo Funcionario</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <form method="post" action="/cargos/cadastrarcargos">
                     <div class="mb-3">
-                      <label for="cpf" class="col-form-label">Cargo:</label>
-                      <input name="nomeCargo" type="text" class="form-control" id="nomeCargo">
-                    </div> 
+                      <label for="cpf" class="col-form-label">CPF:</label>
+                      <input name="funcionarioCPF" type="text" class="form-control" id="funcionarioCPF">
+                    </div>
+                    <div class="mb-3">
+                      <label for="cpf" class="col-form-label">Nome:</label>
+                      <input name="funcionarioNome" type="text" class="form-control" id="funcionarioNome">
+                    </div>
+                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label">Cargo:</label>
+                      <select id="funcionarioCargo" name="funcionarioCargo" class="form-select" aria-label="Default select example">
+                        
+                      </select>
+                    </div>   
                     <div class="mb-3">
                       <label for="message-text" class="col-form-label">Departamento:</label>
                       <select id="departamento_idDepartamento" name="departamento_idDepartamento" class="form-select" aria-label="Default select example">
                         
                       </select>
-                    </div>  
+                    </div>
+                    <div class="mb-3">
+                      <label for="message-text" class="col-form-label">Escala:</label>
+                      <select id="funcionarioEscala" name="funcionarioEscala" class="form-select" aria-label="Default select example">
+                        
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="cpf" class="col-form-label">Telefone:</label>
+                      <input name="funcionarioTelefone" type="text" class="form-control" id="funcionarioTelefone">
+                    </div> 
+                    <div class="mb-3">
+                      <label for="cpf" class="col-form-label">Data Admissao:</label>
+                      <input name="dataAdmissao" type="date" class="form-control" id="dataAdmissao">
+                    </div> 
+                    <div class="mb-3">
+                      <label for="cpf" class="col-form-label">Email:</label>
+                      <input name="funcionarioEmail" type="email" class="form-control" id="funcionarioEmail">
+                    </div> 
+                    <div class="mb-3">
+                      <label for="cpf" class="col-form-label">Senha:</label>
+                      <input name="funcionarioSenha" type="text" class="form-control" id="funcionarioSenha">
+                    </div> 
                     <button class="btn btn-primary" type="submit">Cadastrar</button>
                   </form>
                 </div>
@@ -52,6 +85,7 @@
                     <th>Nome</th>
                     <th>Cargo</th>
                     <th>Departamento</th>
+                    <th>Escala</th>
                     <th>Telefone</th>
                     <th>Data admissão</th>
                     <th>Email</th>
@@ -66,16 +100,108 @@
                         <td><%= value.funcionarioCPF %></td>
                         <td><%= value.funcionarioNome %></td>
                         <td><%= value.funcionarioCargo %></td>
+                        <td><%= value.funcionarioEscala %></td>
                         <td><%= value.funcionarioDepartamento %></td>
                         <td><%= value.funcionarioTelefone %></td>
                         <td><%= value.dataAdmissao %></td>              
                         <td><%= value.funcionarioEmail %></td>
-                        <td><%= value.funcionarioSenha %></td>                                       
+                        <td style="-webkit-text-security: disc;"><%= value.funcionarioSenha %></td>                                       
                         <td>
                             <div>
-                                <button class="btn btn-primary"> <i class="fas fa-pen"></i></button>
-                                <a class="btn btn-danger" href="/funcionarios/deletarfuncionarios/<%= value.idFuncionario %>" role="button"><i
-                                    class="fas fa-trash"></i></a>
+                              <div class="me-1">
+                                <button onclick="listardepartamentoalt('<%= value.idCargo %>')" type="button" class="btn btn-primary"
+                                  data-bs-toggle="modal" data-bs-target="#exampleAlterar<%= value.idCargo %>"
+                                  data-bs-whatever="@alterar">
+                                  <i class="fas fa-pen"></i>
+                                </button>
+                                <div class="modal fade" id="exampleAlterar<%= value.idCargo %>" tabindex="-1"
+                                  aria-labelledby="exampleAlterar<%= value.idCargo %>Label" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleAlterar<%= value.idCargo %>Label">Alterar Funcionario</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form method="post" action="/cargos/cadastrarcargos">
+                                          <div class="mb-3">
+                                            <label for="cpf" class="col-form-label">CPF:</label>
+                                            <input name="funcionarioCPF" type="text" class="form-control" id="funcionarioCPF">
+                                          </div>
+                                          <div class="mb-3">
+                                            <label for="cpf" class="col-form-label">Nome:</label>
+                                            <input name="funcionarioNome" type="text" class="form-control" id="funcionarioNome">
+                                          </div>
+                                          <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Cargo:</label>
+                                            <select id="funcionarioCargo" name="funcionarioCargo" class="form-select" aria-label="Default select example">
+                                              
+                                            </select>
+                                          </div>   
+                                          <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Departamento:</label>
+                                            <select id="departamento_idDepartamento" name="departamento_idDepartamento" class="form-select" aria-label="Default select example">
+                                              
+                                            </select>
+                                          </div>
+                                          <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Escala:</label>
+                                            <select id="funcionarioEscala" name="funcionarioEscala" class="form-select" aria-label="Default select example">
+                                              
+                                            </select>
+                                          </div>
+                                          <div class="mb-3">
+                                            <label for="cpf" class="col-form-label">Telefone:</label>
+                                            <input name="funcionarioTelefone" type="text" class="form-control" id="funcionarioTelefone">
+                                          </div> 
+                                          <div class="mb-3">
+                                            <label for="cpf" class="col-form-label">Data Admissao:</label>
+                                            <input name="dataAdmissao" type="date" class="form-control" id="dataAdmissao">
+                                          </div> 
+                                          <div class="mb-3">
+                                            <label for="cpf" class="col-form-label">Email:</label>
+                                            <input name="funcionarioEmail" type="email" class="form-control" id="funcionarioEmail">
+                                          </div> 
+                                          <div class="mb-3">
+                                            <label for="cpf" class="col-form-label">Senha:</label>
+                                            <input name="funcionarioSenha" type="text" class="form-control" id="funcionarioSenha">
+                                          </div> 
+                                          <button class="btn btn-primary" type="submit">Alterar</button>
+                                        </form>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>   
+                                                            <!--excluir-->
+                                  
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ModalExclusao">
+  <i class="fas fa-trash"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalExclusao" tabindex="-1" aria-labelledby="ModalExclusaoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="ModalExclusaoLabel">Exclusão</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Essa ação é permanente, deseja realmente excluir o registro?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+        <a class="btn btn-danger" href="/funcionarios/deletarfuncionarios/<%= value.idFuncionario %>" role="button"><i
+          class="fas fa-trash"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+                               
                             </div>
                         </td>
                     </tr>
@@ -85,3 +211,5 @@
     </div>
 </div>
 
+
+</body>

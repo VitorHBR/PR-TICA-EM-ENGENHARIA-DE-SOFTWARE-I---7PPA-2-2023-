@@ -1,6 +1,6 @@
 const express = require('express');
 const CargosController = require('../controllers/cargosController');
-
+const Autenticacao = require('../middleware/autenticacao');
 class CargosRoute {
 
     #router;
@@ -13,13 +13,13 @@ class CargosRoute {
 
     constructor() {
         this.#router = express.Router();
-
-        let ctrl = new CargosController
-        this.#router.get('/', ctrl.listarView);
-        this.#router.get('/deletarcargos/:id', ctrl.deletarCargos);
-        this.#router.post('/cadastrarcargos', ctrl.cadastrarCargos);
-        this.#router.post('/buscarcargos', ctrl.buscarCargos);
-        this.#router.post('/alterarcargos', ctrl.alterarCargos);
+        let auth = new Autenticacao();
+        let ctrl = new CargosController();
+        this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
+        this.#router.get('/deletarcargos/:id',auth.usuarioEstaLogado, ctrl.deletarCargos);
+        this.#router.post('/cadastrarcargos',auth.usuarioEstaLogado, ctrl.cadastrarCargos);
+        this.#router.post('/buscarcargos',auth.usuarioEstaLogado, ctrl.buscarCargos);
+        this.#router.post('/alterarcargos',auth.usuarioEstaLogado, ctrl.alterarCargos);
     }
 }
 
