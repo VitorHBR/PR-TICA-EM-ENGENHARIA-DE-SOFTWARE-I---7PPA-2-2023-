@@ -6,15 +6,18 @@ class CargosModel {
     #idCargo;
     #nomeCargo;
     #departamento_idDepartamento;
+    #nomeDepartamento;
 
     get idCargo() { return this.#idCargo; } set idCargo(idCargo) {this.#idCargo = idCargo;}
     get nomeCargo() { return this.#nomeCargo; } set nomeCargo(nomeCargo) {this.#nomeCargo = nomeCargo;}
     get departamento_idDepartamento() { return this.#departamento_idDepartamento; } set departamento_idDepartamento(departamento_idDepartamento) {this.#departamento_idDepartamento = departamento_idDepartamento;}
+    get nomeDepartamento() { return this.#nomeDepartamento; } set nomeDepartamento(nomeDepartamento) {this.#nomeDepartamento = nomeDepartamento;}
 
-    constructor(idCargo, nomeCargo,departamento_idDepartamento) {
+    constructor(idCargo, nomeCargo,departamento_idDepartamento,nomeDepartamento) {
         this.#idCargo = idCargo
         this.#nomeCargo = nomeCargo
         this.#departamento_idDepartamento = departamento_idDepartamento
+        this.#nomeDepartamento = nomeDepartamento
    
     }
 
@@ -30,8 +33,10 @@ class CargosModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new CargosModel(row['idCargo'], row['nomeCargo'], row['nomeDepartamento']));
+                
+                listaRetorno.push(new CargosModel(row['idCargo'], row['nomeCargo'],row['departamento_idDepartamento'],row['nomeDepartamento']));
             }
+          
         }
 
         return listaRetorno;

@@ -20,6 +20,7 @@ class EscalasRoute {
         this.#router.post('/cadastrarescalas',auth.usuarioEstaLogado, ctrl.cadastrarEscalas);
         this.#router.post('/buscarescalas',auth.usuarioEstaLogado, ctrl.buscarEscalas);
         this.#router.post('/alterarescalas',auth.usuarioEstaLogado, ctrl.alterarEscalas);
+        this.#router.get('/listarfetch',auth.usuarioEstaLogado, ctrl.listarJson);
     }
 }
 

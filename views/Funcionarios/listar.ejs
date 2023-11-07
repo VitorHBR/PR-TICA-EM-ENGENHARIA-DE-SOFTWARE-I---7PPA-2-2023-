@@ -1,7 +1,8 @@
 <!--Para fazer com fetch-->
-<script src="/js/Departamento/listar.js"></script>
+<script src="/js/Cargo/listar.js"></script>
+<script src="/js/Escalas/listar.js"></script>
 
-<body onload="listardepartamento()">
+<body onload="listardepartamento(),listarescalas()">
   <div>
     <h1>Funcionários</h1>
     <div>
@@ -23,7 +24,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form method="post" action="/cargos/cadastrarcargos">
+                  <form method="post" action="/funcionarios/cadastrarfuncionarios">
                     <div class="mb-3">
                       <label for="cpf" class="col-form-label">CPF:</label>
                       <input name="funcionarioCPF" type="text" class="form-control" id="funcionarioCPF">
@@ -34,14 +35,14 @@
                     </div>
                     <div class="mb-3">
                       <label for="message-text" class="col-form-label">Cargo:</label>
-                      <select id="funcionarioCargo" name="funcionarioCargo" class="form-select" aria-label="Default select example">
+                      <select oninput="setardepartamento(document.getElementById('cargo_idCargo').value)"  id="cargo_idCargo" name="cargo_idCargo" class="form-select" aria-label="Default select example">
                         
                       </select>
                     </div>   
                     <div class="mb-3">
                       <label for="message-text" class="col-form-label">Departamento:</label>
                       <select id="departamento_idDepartamento" name="departamento_idDepartamento" class="form-select" aria-label="Default select example">
-                        
+                        <option id="dp" value=""></option>
                       </select>
                     </div>
                     <div class="mb-3">
@@ -109,62 +110,62 @@
                         <td>
                             <div>
                               <div class="me-1">
-                                <button onclick="listardepartamentoalt('<%= value.idCargo %>')" type="button" class="btn btn-primary"
-                                  data-bs-toggle="modal" data-bs-target="#exampleAlterar<%= value.idCargo %>"
+                                <button onclick="listardepartamentoalt('<%= value.idCargo %>'),listarescalaalt('<%= value.idFuncionario %>')" type="button" class="btn btn-primary"
+                                  data-bs-toggle="modal" data-bs-target="#exampleAlterar<%= value.idFuncionario %>"
                                   data-bs-whatever="@alterar">
                                   <i class="fas fa-pen"></i>
                                 </button>
-                                <div class="modal fade" id="exampleAlterar<%= value.idCargo %>" tabindex="-1"
-                                  aria-labelledby="exampleAlterar<%= value.idCargo %>Label" aria-hidden="true">
+                                <div class="modal fade" id="exampleAlterar<%= value.idFuncionario %>" tabindex="-1"
+                                  aria-labelledby="exampleAlterar<%= value.idFuncionario %>Label" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleAlterar<%= value.idCargo %>Label">Alterar Funcionario</h1>
+                                        <h1 class="modal-title fs-5" id="exampleAlterar<%= value.idFuncionario %>Label">Alterar Funcionario</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
-                                        <form method="post" action="/cargos/cadastrarcargos">
+                                        <form method="post" action="/funcionarios/alterarfuncionarios">
                                           <div class="mb-3">
                                             <label for="cpf" class="col-form-label">CPF:</label>
-                                            <input name="funcionarioCPF" type="text" class="form-control" id="funcionarioCPF">
+                                            <input name="funcionarioCPF" type="text" class="form-control" id="funcionarioCPF" value="<%= value.funcionarioCPF %>">
                                           </div>
                                           <div class="mb-3">
                                             <label for="cpf" class="col-form-label">Nome:</label>
-                                            <input name="funcionarioNome" type="text" class="form-control" id="funcionarioNome">
+                                            <input name="funcionarioNome" type="text" class="form-control" id="funcionarioNome" value="<%= value.funcionarioNome %>">
                                           </div>
                                           <div class="mb-3">
                                             <label for="message-text" class="col-form-label">Cargo:</label>
-                                            <select id="funcionarioCargo" name="funcionarioCargo" class="form-select" aria-label="Default select example">
+                                            <select oninput="setardepartamentoalt(document.getElementById('cargoalt<%= value.idCargo %>').value)" id="cargoalt<%= value.idCargo %>" name="cargoalt<%= value.idCargo %>" class="form-select" aria-label="Default select example">
                                               
                                             </select>
                                           </div>   
                                           <div class="mb-3">
                                             <label for="message-text" class="col-form-label">Departamento:</label>
-                                            <select id="departamento_idDepartamento" name="departamento_idDepartamento" class="form-select" aria-label="Default select example">
-                                              
+                                            <select  class="form-select" aria-label="Default select example">
+                                              <option id="dpalt<%= value.idCargo %>" name="dpalt<%= value.idCargo %>" value=""></option>
                                             </select>
                                           </div>
                                           <div class="mb-3">
                                             <label for="message-text" class="col-form-label">Escala:</label>
-                                            <select id="funcionarioEscala" name="funcionarioEscala" class="form-select" aria-label="Default select example">
+                                            <select id="escalaalt<%= value.idFuncionario %>" name="escalaalt<%= value.idFuncionario %>" class="form-select" aria-label="Default select example">
                                               
                                             </select>
                                           </div>
                                           <div class="mb-3">
                                             <label for="cpf" class="col-form-label">Telefone:</label>
-                                            <input name="funcionarioTelefone" type="text" class="form-control" id="funcionarioTelefone">
+                                            <input name="funcionarioTelefone" type="text" class="form-control" id="funcionarioTelefone" value="<%= value.funcionarioTelefone %>">
                                           </div> 
                                           <div class="mb-3">
                                             <label for="cpf" class="col-form-label">Data Admissao:</label>
-                                            <input name="dataAdmissao" type="date" class="form-control" id="dataAdmissao">
+                                            <input name="dataAdmissao" type="date" class="form-control" id="dataAdmissao" value="<%= value.dataAdmissao %>">
                                           </div> 
                                           <div class="mb-3">
                                             <label for="cpf" class="col-form-label">Email:</label>
-                                            <input name="funcionarioEmail" type="email" class="form-control" id="funcionarioEmail">
+                                            <input name="funcionarioEmail" type="email" class="form-control" id="funcionarioEmail" value="<%= value.funcionarioEmail %>">
                                           </div> 
                                           <div class="mb-3">
                                             <label for="cpf" class="col-form-label">Senha:</label>
-                                            <input name="funcionarioSenha" type="text" class="form-control" id="funcionarioSenha">
+                                            <input name="funcionarioSenha" type="text" class="form-control" id="funcionarioSenha" value="<%= value.funcionarioSenha %>">
                                           </div> 
                                           <button class="btn btn-primary" type="submit">Alterar</button>
                                         </form>

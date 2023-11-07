@@ -11,7 +11,14 @@ class CargosController {
     async listarJson(req, res) {
         let cargo = new CargosModel();
         let lista = await cargo.listarCargos();
-        res.send(lista);
+       
+        var retorno=[];
+        for (var index = 0; index < lista.length; index++) 
+        {   retorno.push([lista[index].idCargo,lista[index].nomeCargo,lista[index].departamento_idDepartamento,lista[index].nomeDepartamento]) ;
+           
+        }
+        console.log(retorno);
+        res.send(retorno);
     }
 
 

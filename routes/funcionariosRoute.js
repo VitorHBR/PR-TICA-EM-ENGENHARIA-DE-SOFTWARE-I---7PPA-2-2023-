@@ -18,6 +18,8 @@ class FuncionariosRoute {
         this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
         this.#router.post('/buscarfuncionarios',auth.usuarioEstaLogado, ctrl.buscarFuncionarios);
         this.#router.get('/deletarfuncionarios/:id',auth.usuarioEstaLogado, ctrl.deletarFuncionarios);
+        this.#router.post('/cadastrarfuncionarios',auth.usuarioEstaLogado, ctrl.cadastrarFuncionarios);
+        
     }
 }
 

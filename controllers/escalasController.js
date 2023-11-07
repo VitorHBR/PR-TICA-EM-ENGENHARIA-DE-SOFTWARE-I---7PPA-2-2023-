@@ -11,7 +11,14 @@ class EscalasController {
     async listarJson(req, res) {
         let escala = new EscalasModel();
         let lista = await escala.listarEscalas();
-        res.send(lista);
+       
+        var retorno=[];
+        for (var index = 0; index < lista.length; index++) 
+        {   retorno.push([lista[index].idEscala,lista[index].nomeEscala]) ;
+           
+        }
+        console.log(retorno);
+        res.send(retorno);
     }
 
 

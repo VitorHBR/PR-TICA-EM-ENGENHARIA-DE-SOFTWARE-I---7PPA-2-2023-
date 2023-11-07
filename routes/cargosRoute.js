@@ -20,6 +20,7 @@ class CargosRoute {
         this.#router.post('/cadastrarcargos',auth.usuarioEstaLogado, ctrl.cadastrarCargos);
         this.#router.post('/buscarcargos',auth.usuarioEstaLogado, ctrl.buscarCargos);
         this.#router.post('/alterarcargos',auth.usuarioEstaLogado, ctrl.alterarCargos);
+        this.#router.get('/listarfetch',auth.usuarioEstaLogado, ctrl.listarJson);
     }
 }
 
