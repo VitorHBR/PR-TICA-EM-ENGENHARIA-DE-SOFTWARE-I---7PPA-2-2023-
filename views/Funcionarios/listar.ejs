@@ -110,7 +110,7 @@
                         <td>
                             <div>
                               <div class="me-1">
-                                <button onclick="listardepartamentoalt('<%= value.idCargo %>'),listarescalaalt('<%= value.idFuncionario %>')" type="button" class="btn btn-primary"
+                                <button onclick="/*listardepartamentoalt('<%= value.idCargo %>'),*/listarescalaalt('<%= value.idFuncionario %>')" type="button" class="btn btn-primary"
                                   data-bs-toggle="modal" data-bs-target="#exampleAlterar<%= value.idFuncionario %>"
                                   data-bs-whatever="@alterar">
                                   <i class="fas fa-pen"></i>
@@ -126,6 +126,7 @@
                                       <div class="modal-body">
                                         <form method="post" action="/funcionarios/alterarfuncionarios">
                                           <div class="mb-3">
+                                            <input type="text" hidden="true" id="idFuncionario" name="idFuncionario" value="<%= value.idFuncionario %>">
                                             <label for="cpf" class="col-form-label">CPF:</label>
                                             <input name="funcionarioCPF" type="text" class="form-control" id="funcionarioCPF" value="<%= value.funcionarioCPF %>">
                                           </div>
@@ -133,7 +134,8 @@
                                             <label for="cpf" class="col-form-label">Nome:</label>
                                             <input name="funcionarioNome" type="text" class="form-control" id="funcionarioNome" value="<%= value.funcionarioNome %>">
                                           </div>
-                                          <div class="mb-3">
+                                          <!--
+                                            <div class="mb-3">
                                             <label for="message-text" class="col-form-label">Cargo:</label>
                                             <select oninput="setardepartamentoalt(document.getElementById('cargoalt<%= value.idCargo %>').value)" id="cargoalt<%= value.idCargo %>" name="cargoalt<%= value.idCargo %>" class="form-select" aria-label="Default select example">
                                               
@@ -145,9 +147,11 @@
                                               <option id="dpalt<%= value.idCargo %>" name="dpalt<%= value.idCargo %>" value=""></option>
                                             </select>
                                           </div>
+                                          -->
+                                          
                                           <div class="mb-3">
                                             <label for="message-text" class="col-form-label">Escala:</label>
-                                            <select id="escalaalt<%= value.idFuncionario %>" name="escalaalt<%= value.idFuncionario %>" class="form-select" aria-label="Default select example">
+                                            <select id="escalaalt<%= value.idFuncionario %>" name="funcionarioEscala" class="form-select" aria-label="Default select example">
                                               
                                             </select>
                                           </div>
@@ -155,10 +159,13 @@
                                             <label for="cpf" class="col-form-label">Telefone:</label>
                                             <input name="funcionarioTelefone" type="text" class="form-control" id="funcionarioTelefone" value="<%= value.funcionarioTelefone %>">
                                           </div> 
-                                          <div class="mb-3">
+                                          <!--
+                                             <div class="mb-3">
                                             <label for="cpf" class="col-form-label">Data Admissao:</label>
                                             <input name="dataAdmissao" type="date" class="form-control" id="dataAdmissao" value="<%= value.dataAdmissao %>">
                                           </div> 
+                                          -->
+                                         
                                           <div class="mb-3">
                                             <label for="cpf" class="col-form-label">Email:</label>
                                             <input name="funcionarioEmail" type="email" class="form-control" id="funcionarioEmail" value="<%= value.funcionarioEmail %>">

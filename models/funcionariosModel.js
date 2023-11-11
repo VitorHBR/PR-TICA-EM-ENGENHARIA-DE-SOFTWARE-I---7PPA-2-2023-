@@ -113,6 +113,16 @@ class FuncionariosModel {
         return true;
     }
 
+    async alterarFuncionarios() {
+        let sql = "UPDATE `funcionario` SET `funcionarioCPF`=?,`funcionarioNome`=?,`funcionarioTelefone`=?,`funcionarioEmail`=?,`funcionarioSenha`=?,`escalaDeTrabalho_idEscalaDeTrabalho`=? WHERE `funcionario`.`idFuncionario` = ?";
+      
+        var values = [this.funcionarioCPF, this.funcionarioNome, this.funcionarioTelefone, this.funcionarioEmail, this.funcionarioSenha,this.funcionarioEscala, this.idFuncionario];
+      
+        var rows = await conexao.ExecutaComando(sql, values);
+      
+        return true;
+    }
+
 }
 
 module.exports = FuncionariosModel;
