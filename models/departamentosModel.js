@@ -44,7 +44,7 @@ class DepartamentosModel {
 
         return true;
     }
-
+    
     async cadastrarDepartamentos() {
 
         let sql = "INSERT INTO `departamento`(`nomeDepartamento`) VALUES ('"+this.nomeDepartamento+"');";
