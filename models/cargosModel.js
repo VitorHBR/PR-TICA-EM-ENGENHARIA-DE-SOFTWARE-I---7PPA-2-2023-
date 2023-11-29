@@ -83,14 +83,27 @@ class CargosModel {
 
 
     async alterarCargos() {
-        let sql = "UPDATE `cargo` SET `nomeCargo` = ?,`departamento_idDepartamento`= ? WHERE `cargo`.`idCargo` = ?";
+        // Verifica se o departamento_idDepartamento existe na tabela departamento
+        const departamentoExists = await this.checkIfExists('departamento', 'idDepartamento', this.departamento_idDepartamento);
+    
+        if (!departamentoExists) {
+            throw new Error('ID de Departamento não existe na tabela referenciada.');
+        }
+    
+        let sql = "UPDATE `cargo` SET `nomeCargo` = ?, `departamento_idDepartamento` = ? WHERE `cargo`.`idCargo` = ?";
       
-        var values = [this.nomeCargo,this.departamento_idDepartamento,this.idCargo];
+        var values = [this.nomeCargo, this.departamento_idDepartamento, this.idCargo];
       
         var rows = await conexao.ExecutaComando(sql, values);
       
         return true;
-      }
+    }
+    
+    async checkIfExists(table, column, value) {
+        const sql = `SELECT 1 FROM \`${table}\` WHERE \`${column}\` = ? LIMIT 1`;
+        const rows = await conexao.ExecutaComando(sql, [value]);
+        return rows.length > 0;
+    }
 
 
 }

@@ -11,7 +11,7 @@ class Database {
 
         this.#conexao = mysql.createPool({
             host: 'localhost',
-            database: 'sistemadepontos',
+            database: 'sistemadeponto',
             user: 'root',
             password: '',
         });

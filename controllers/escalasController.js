@@ -37,6 +37,8 @@ class EscalasController {
 
         escala.nomeEscala=req.body.nomeEscala;
         escala.horarioEntrada=req.body.horarioEntrada;
+        escala.entradaRepouso=req.body.entradaRepouso;
+        escala.saidaRepouso=req.body.saidaRepouso;
         escala.horarioSaida=req.body.horarioSaida;
 
        
@@ -62,6 +64,8 @@ class EscalasController {
         escala.idEscala = req.body.idEscala;
         escala.nomeEscala= req.body.nomeEscala;
         escala.horarioEntrada= req.body.horarioEntrada;
+        escala.entradaRepouso= req.body.entradaRepouso;
+        escala.saidaRepouso= req.body.saidaRepouso;
         escala.horarioSaida= req.body.horarioSaida;
        
 

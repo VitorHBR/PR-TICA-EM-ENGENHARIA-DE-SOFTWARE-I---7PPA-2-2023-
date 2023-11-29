@@ -28,8 +28,16 @@
                 <input name="nomeEscala" type="text" class="form-control" id="nomeEscala">
               </div>
               <div class="mb-3">
-                <label for="horarioEntrada" class="col-form-label">Horário Entrada:</label>
+                <label for="horarioEntrada" class="col-form-label">Entrada:</label>
                 <input name="horarioEntrada" type="time" class="form-control" id="horarioEntrada">
+              </div>
+              <div class="mb-3">
+                <label for="entradaRepouso" class="col-form-label">Entrada Repouso:</label>
+                <input name="entradaRepouso" type="time" class="form-control" id="entradaRepouso">
+              </div>
+              <div class="mb-3">
+                <label for="saidaRepouso" class="col-form-label">Saída Repouso:</label>
+                <input name="saidaRepouso" type="time" class="form-control" id="saidaRepouso">
               </div>
               <div class="mb-3">
                 <label for="horarioSaida" class="col-form-label">Horário Saida:</label>
@@ -51,8 +59,10 @@
         <tr>
           <th>Código</th>
           <th>Escala</th>
-          <th>Horário Entrada</th>
-          <th>Horário Saída</th>
+          <th>Entrada</th>
+          <th>Entrada Repouso</th>
+          <th>Saída Repouso</th>
+          <th>Saída</th>
         </tr>
       </thead>
       <tbody>
@@ -66,6 +76,12 @@
             </td>
             <td>
               <%= value.horarioEntrada %>
+            </td>
+            <td>
+              <%= value.entradaRepouso %>
+            </td>
+            <td>
+              <%= value.saidaRepouso %>
             </td>
             <td>
               <%= value.horarioSaida %>
@@ -97,12 +113,22 @@
                                   value="<%= value.nomeEscala %>">
                               </div>
                               <div class="mb-3">
-                                <label for="alterarHoraEntrada" class="col-form-label">Horário Entrada:</label>
+                                <label for="alterarHoraEntrada" class="col-form-label">Entrada:</label>
                                 <input id="horarioEntrada" name="horarioEntrada" type="time" class="form-control"
                                   value="<%= value.horarioEntrada %>">
                               </div>
                               <div class="mb-3">
-                                <label for="alterarHoraSaida" class="col-form-label">Horário Saída:</label>
+                                <label for="alterarEntradaRepouso" class="col-form-label">Entrada Repouso :</label>
+                                <input id="entradaRepouso" name="entradaRepouso" type="time" class="form-control"
+                                  value="<%= value.entradaRepouso %>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="alterarSaidaRepouso" class="col-form-label">Saída Repouso:</label>
+                                <input id="saidaRepouso" name="saidaRepouso" type="time" class="form-control"
+                                  value="<%= value.saidaRepouso %>">
+                              </div>
+                              <div class="mb-3">
+                                <label for="alterarHoraSaida" class="col-form-label">Saída:</label>
                                 <input id="horarioSaida" name="horarioSaida" type="time" class="form-control"
                                   value="<%= value.horarioSaida %>">
                               </div>
